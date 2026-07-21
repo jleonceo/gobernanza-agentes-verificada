@@ -130,7 +130,7 @@ Five detectors, all read-only, none of them using a language model:
 | `audit_chain` | An audit trail with a missing link or a reordered entry |
 | `panel_salud` | A dashboard reporting green by aggregating checks that never actually ran |
 
-### The part almost nobody ships: the verifier's verifier
+### The verifier's verifier, which almost nobody ships
 
 Any tool that issues a verdict has the same problem. If it says green, how do you know the green
 is true and not a bug in the tool itself?
@@ -159,7 +159,17 @@ Step by step setup in [install.md](install.md). The rules any new detector must 
   today and in six months, with no dependency on which model you pay for.
 - **It fixes nothing.** It reports. Fixing requires knowing the system, which a tool does not.
 - **It does not measure whether your agents answer well.** It measures whether the installation
-  is still intact. For the former, see the related repos above.
+  is still intact. For that, see the related repos below.
+
+### Related repos
+
+| Repo | What it covers |
+|---|---|
+| [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas) | The governance method in prose. This repo is the code that checks it |
+| [guardianes-verificados-ia](https://github.com/jleonceo/guardianes-verificados-ia) | Guards proven by mutation testing. Same principle, another layer |
+| [orquestacion-enjambres-ia](https://github.com/jleonceo/orquestacion-enjambres-ia) | How each request is assigned to an agent |
+| [verificacion-determinista-ia](https://github.com/jleonceo/verificacion-determinista-ia) | Checks without AI over accounting data. Same principle, another domain |
+| [llm-eval-contable](https://github.com/jleonceo/llm-eval-contable) | How to evaluate whether a skill answers well |
 
 ---
 
