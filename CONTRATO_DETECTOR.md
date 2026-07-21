@@ -10,7 +10,7 @@
 
 ---
 
-## 1. La firma (FIJA, no negociable)
+## 1. La firma es fija
 
 ```python
 def run(ctx) -> list[Veredicto]:

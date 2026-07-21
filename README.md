@@ -22,7 +22,7 @@ docena de documentos apuntan a ficheros que se borraron hace semanas.
 Nada de eso da un error. El sistema responde igual de rápido y con la misma cara de estar bien.
 Por eso no se detecta mirando. Hay que medirlo.
 
-### Dos casos reales del sistema donde nació esta herramienta
+### Dos casos reales de este mismo sistema
 
 **La habilidad que nadie llamaba.** El 21 de julio de 2026 descubrí que dos habilidades llevaban
 semanas sin recibir un solo encargo. Existían en el disco y funcionaban al llamarlas a mano. El
@@ -47,7 +47,7 @@ Cinco detectores, todos de solo lectura y sin modelos de lenguaje:
 | `audit_chain` | Un registro de auditoría al que le falta un eslabón o le han cambiado el orden |
 | `panel_salud` | Un panel que da verde agregando comprobaciones que en realidad no se ejecutaron |
 
-### El verificador del verificador, que casi nadie incluye
+### El verificador del verificador
 
 Cualquier herramienta que emite un veredicto tiene el mismo problema. Si dice verde, ¿cómo sabes
 que el verde es cierto y no un fallo de la propia herramienta?
@@ -107,7 +107,7 @@ weeks ago.
 None of this raises an error. The system answers just as fast, looking just as healthy. You
 cannot spot it by looking. You have to measure it.
 
-### Two real cases, from the system this tool came from
+### Two real cases from this same system
 
 **The skill nobody called.** On 21 July 2026 I found two skills that had gone weeks without a
 single assignment. They existed on disk and worked when called by hand. The router did not know
@@ -131,7 +131,7 @@ Five detectors, all read-only, none of them using a language model:
 | `audit_chain` | An audit trail with a missing link or a reordered entry |
 | `panel_salud` | A dashboard reporting green by aggregating checks that never actually ran |
 
-### The verifier's verifier, which almost nobody ships
+### The verifier's verifier
 
 Any tool that issues a verdict has the same problem. If it says green, how do you know the green
 is true and not a bug in the tool itself?
