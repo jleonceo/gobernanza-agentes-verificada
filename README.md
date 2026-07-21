@@ -71,14 +71,16 @@ python contrato/result_contract.py sobre.json # validar el sobre de una entrega 
 Instalación y configuración paso a paso en [install.md](install.md). Las reglas que cumple
 cualquier detector nuevo están en [CONTRATO_DETECTOR.md](CONTRATO_DETECTOR.md).
 
-### Qué NO hace
+### Sus límites
 
-- **No usa IA.** Es código que lee ficheros y compara. Ahí está la gracia: da el mismo resultado
-  hoy y dentro de seis meses, sin depender del modelo que tengas contratado.
-- **No arregla nada.** Señala. Reparar exige conocer el sistema, que es justo lo que una
-  herramienta no sabe.
-- **No mide si tus agentes responden bien.** Mide si la instalación sigue entera. Para lo primero
-  hay otros repos, enlazados abajo.
+Dentro solo hay código que lee ficheros y compara. Ningún modelo de lenguaje interviene. Esa es
+la razón de que dé el mismo resultado hoy que dentro de seis meses.
+
+Su trabajo termina al señalar el defecto. La reparación exige conocer el sistema y decidir qué se
+cambia, cosa que ninguna herramienta puede hacer por ti.
+
+Lo que mide es la integridad de la instalación. Si tus agentes responden bien o mal es otra
+pregunta. Los repos de abajo cubren esa.
 
 ### Repos relacionados
 
@@ -154,13 +156,16 @@ python contrato/result_contract.py env.json   # validate one handoff envelope
 Step by step setup in [install.md](install.md). The rules any new detector must satisfy are in
 [CONTRATO_DETECTOR.md](CONTRATO_DETECTOR.md).
 
-### What it does NOT do
+### Its limits
 
-- **No AI involved.** It is code that reads files and compares. That is the point: same result
-  today and in six months, with no dependency on which model you pay for.
-- **It fixes nothing.** It reports. Fixing requires knowing the system, which a tool does not.
-- **It does not measure whether your agents answer well.** It measures whether the installation
-  is still intact. For that, see the related repos below.
+Inside there is only code that reads files and compares them. No language model takes part, which
+is why it returns the same result today and six months from now.
+
+Its job ends when it points at the defect. Repairing means understanding the system and deciding
+what to change, which no tool can do for you.
+
+What it measures is the integrity of the installation. Whether your agents answer well is a
+different question. The repos below cover that one.
 
 ### Related repos
 
