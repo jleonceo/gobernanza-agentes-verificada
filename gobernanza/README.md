@@ -1,4 +1,4 @@
-# Gobernanza — métricas DIU / CDL
+# Gobernanza: métricas DIU / CDL
 
 Miden la **gobernanza misma**, no el corpus: cuando el sistema **defiere** una decisión al
 humano (VÍA C), ¿esa deferencia **informa** o es **cortina**?

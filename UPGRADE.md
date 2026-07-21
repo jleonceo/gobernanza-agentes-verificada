@@ -1,4 +1,4 @@
-# UPGRADE.md — actualizar versiones de `agent-governance-checks` sin romper el gate
+# UPGRADE.md: actualizar versiones de `agent-governance-checks` sin romper el gate
 
 > **Qué es esto.** El protocolo seguro para subir la versión de Python o de PyYAML (la
 > única dependencia externa) sin degradar el gate. El kit es determinista, `READ-ONLY` y
@@ -15,7 +15,7 @@
 
 Estados posibles: **PROBADO** (verificado en vivo, gate verde) · **DECLARADO** (soportado
 según README/install/SPEC, sin verificación en vivo registrada aquí) · **NO VERIFICADO**
-(no consta ni una cosa ni otra — no se afirma) · **EXCLUIDO** (fuera del rango por diseño).
+(no consta ni una cosa ni otra: no se afirma) · **EXCLUIDO** (fuera del rango por diseño).
 
 ### 1.1 Python
 
@@ -28,7 +28,7 @@ según README/install/SPEC, sin verificación en vivo registrada aquí) · **NO 
 | 3.12 | NO VERIFICADO | No consta. |
 | 3.13 | **PROBADO** | Registrado como probado (soporte declarado 3.8+, extremo alto verificado). |
 | 3.14 | **PROBADO** (este ladrillo) | Verificado en vivo el 06/07/2026 en la máquina de build: `Python 3.14.6`, gate VERDE por 2 métodos (ver §3). No estaba en la matriz previa; se añade porque se ejecutó de verdad. |
-| ≥ 3.15 | NO VERIFICADO | Fuera de lo probado. No se afirma compatibilidad hasta correr el gate. |
+| ≥ 3.15 | NO VERIFICADO | Fuera de lo probado. No se afirma compatibilidad hasta ejecutar el gate. |
 
 > **Base del soporte 3.8+.** El núcleo es stdlib estable (`pathlib`, `re`, `json`,
 > `argparse`, `unittest`). No usa sintaxis por encima de 3.8 conocida como load-bearing.
@@ -58,15 +58,15 @@ Pin vigente en `requirements.txt`: **`PyYAML>=5.4,<7.0`**.
 ## 2. Protocolo de actualización seguro
 
 Cinco pasos. No saltarse el 2 ni el 3: el gate se mide **por dos métodos que deben coincidir**
-(doctrina "cifra por instrumento = dos métodos"). Correr todo **desde la carpeta del kit**
+(una cifra por instrumento exige dos métodos). Ejecutar todo **desde la carpeta del kit**
 (`agent-governance-checks/`).
 
-**Paso 1 — Subir la versión.**
+**Paso 1. Subir la versión.**
 Cambiar el intérprete de Python **o** la versión de PyYAML (respetando el pin
 `>=5.4,<7.0`; si la subida es a 7.x, leer §4 antes de tocar el pin). Anotar de qué versión
 se parte y a cuál se va.
 
-**Paso 2 — Método 1: gate con fixtures limpias Y rotas.**
+**Paso 2. Método 1: gate con fixtures limpias Y rotas.**
 ```bash
 python gate/run_gate.py --fixtures limpias   # las LIMPIAS deben dar todo SANO
 python gate/run_gate.py --fixtures rotas      # cada fixture ROTA da su rojo EXACTO
@@ -75,7 +75,7 @@ python gate/run_gate.py --fixtures ambas      # las dos + convergencia directa M
 El gate es un camino feliz **y** un camino negativo: las fixtures **limpias** tienen que
 seguir dando **SANO**, y las **rotas** tienen que seguir detectando su defecto exacto (§2, criterio 4).
 
-**Paso 3 — Método 2: verificador independiente (segundo método).**
+**Paso 3. Método 2: verificador independiente (segundo método).**
 ```bash
 python gate/verificador_minimo.py
 ```
@@ -83,7 +83,7 @@ No reutiliza la agregación del runner: recomputa el veredicto por un camino pro
 contrasta contra el mismo `esperado.txt`. Si M1 y M2 divergen, es ROJO aunque cada uno por
 separado parezca verde. En `--fixtures ambas` el propio `run_gate` ya cruza mapa-a-mapa M1 vs M2.
 
-**Paso 4 — Criterio de no-regresión (qué debe seguir cierto).**
+**Paso 4. Criterio de no-regresión (qué debe seguir cierto).**
 La subida se acepta **solo si**, tras el cambio de versión:
 - **LIMPIAS → SANO.** Las fixtures limpias siguen agregando `SANO` en todos los detectores.
 - **ROTAS → cada defecto detectado EXACTAMENTE.** Cada fixture rota sigue emitiendo el rojo
@@ -91,7 +91,7 @@ La subida se acepta **solo si**, tras el cambio de versión:
   **Recuento verificado en vivo (09/07/2026):** hay **12 carpetas** en `gate/fixtures/rotas/`,
   cada una con su `esperado.txt`. Las **12** las consume el gate: tanto `run_gate.py`
   (`correr_rotas`) como `verificador_minimo.py` (método 2) recorren **todos** los subdirectorios
-  de `rotas/` con `(FIXTURES/"rotas").iterdir()` — no hay lista fija, se itera el disco. Por eso
+  de `rotas/` con `(FIXTURES/"rotas").iterdir()`: no hay lista fija, se itera el disco. Por eso
   el recuento es literalmente "contar las carpetas".
   - **11 fixtures rotas "clásicas"** (una por defecto de detector): `01_skill_invisible`
     (INV-R1), `02_colision_routing` (INV-R4), `03_wikilink_roto` (LINT-WIKILINK),
@@ -111,7 +111,7 @@ La subida se acepta **solo si**, tras el cambio de versión:
   > consumidas por el gate) de "clásicas de un solo defecto" (11).
 - **Ambos métodos VERDE y convergentes.** M1 y M2 coinciden fixture a fixture.
 
-**Paso 5 — Si degrada, revertir.**
+**Paso 5. Si degrada, revertir.**
 Si cualquier criterio del paso 4 falla (una limpia deja de dar SANO, una rota deja de
 detectar su defecto, o M1 y M2 divergen), **revertir la subida de versión** (volver al
 intérprete/PyYAML anterior) y no adoptar el cambio. El kit no toca tu entorno (READ-ONLY),
@@ -123,7 +123,7 @@ deshacer. Diagnosticar la causa antes de reintentar; no subir "a ver si esta vez
 ## 3. Última verificación en vivo (este ladrillo)
 
 Ejecutado el **06/07/2026** desde la carpeta del kit, tras crear este documento (es inerte;
-no toca código — la ejecución es no-regresión de fontanería):
+no toca código: la ejecución es no-regresión de fontanería):
 
 - Entorno: **Python 3.14.6**, **PyYAML 6.0.3**.
 - `python gate/run_gate.py --fixtures ambas` → `GATE (metodo 1 + convergencia directa m1/m2) VERDE` · exit 0.
@@ -134,7 +134,7 @@ constaban antes.
 
 ---
 
-## 4. Por qué el pin `<7.0` — qué se rompe si sube PyYAML a 7.x
+## 4. Por qué el pin `<7.0`: qué se rompe si sube PyYAML a 7.x
 
 **El pin excluye 7.x a propósito.** Motivo de fondo: la serie 7.x de PyYAML es una versión
 mayor y, como todo cambio de versión mayor, puede alterar el **contrato de carga** (los
@@ -149,11 +149,11 @@ las versiones históricas de PyYAML arrastraban. La familia de cambios que motiv
 - **Riesgo concreto para este kit.** Si 7.x cambia cómo `safe_load` resuelve tipos escalares
   (fechas, `on/off`→bool, números), un `config/*.yaml` que hoy carga con un tipo podría
   cargar con otro, y el `config_loader` fail-fast (que aborta ante clave/tipo inesperado)
-  podría empezar a **abortar sobre config que antes era válida** — o, peor, cargar un valor
+  podría empezar a **abortar sobre config que antes era válida**: o, peor, cargar un valor
   con el tipo equivocado sin avisar. Eso rompería el gate por un camino silencioso.
 
 **Por eso el techo NO se sube a ciegas.** 7.x pasa de EXCLUIDO a candidato **solo** tras
-correr el protocolo del §2 con PyYAML 7.x instalado y comprobar que:
+ejecutar el protocolo del §2 con PyYAML 7.x instalado y comprobar que:
 1. las fixtures **limpias siguen dando SANO** (la config sigue cargando con los mismos
    tipos), y
 2. las **12 rotas siguen detectando su defecto exacto** (las 11 clásicas + `06_colision_routing_parcial`,

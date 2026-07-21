@@ -1,11 +1,11 @@
-# CONTRATO_DETECTOR — la firma que TODO detector debe cumplir
+# CONTRATO_DETECTOR: la firma que TODO detector debe cumplir
 
 > Entregable NUEVO de v1 (cierra hueco #6 del SPEC). Sin este contrato el enjambre
 > programador NO puede construir ni un tercero extender. Este documento es la
 > **definición de "hecho"**: describe la interfaz, no la implementa.
 >
 > Escrito por VERIFICADOR-PROGRAMADOR el 03/07/2026 (fase test-primero). El código de
-> `motor/` y `detectores/` **todavía no existe** — es correcto que el gate falle en rojo
+> `motor/` y `detectores/` **todavía no existe**: es correcto que el gate falle en rojo
 > hasta que el CONSTRUCTOR lo implemente respetando exactamente esta firma.
 
 ---
@@ -22,7 +22,7 @@ def run(ctx) -> list[Veredicto]:
 - Devuelve **SIEMPRE** una `list[Veredicto]` (ver §2). Nunca `None`, nunca un dict,
   nunca un escalar. Lista vacía `[]` es válida (significa "nada que reportar"), pero
   un detector que declara un invariante DEBE emitir al menos un Veredicto por él.
-- **NUNCA imprime** (`print`, logging a stdout) — el runner es quien decide qué mostrar.
+- **NUNCA imprime** (`print`, logging a stdout): el runner es quien decide qué mostrar.
 - **NUNCA escribe** en el filesystem del cliente. READ-ONLY absoluto.
 - **NUNCA usa** `expanduser`, `Path.home()`, `os.environ['HOME']`, ni rutas absolutas
   literales. Toda ruta llega por `ctx` (root inyectada) o por config compilada en `ctx`.
@@ -109,8 +109,7 @@ El runner:
 
 `invariantes.yaml` declara ≥3 invariantes, uno por detector. El gate ASSERT que
 **{ids declarados} == {ids que el registro realmente ejecutó}** y `len >= 3`.
-Esto prueba que el motor (runner + registro + snapshot) se EJERCITA de punta a punta —
-que el detector pasó por el registro, no que su lógica sea correcta (eso lo prueban las
+Esto prueba que el motor (runner + registro + snapshot) se EJERCITA de punta a punta: que el detector pasó por el registro, no que su lógica sea correcta (eso lo prueban las
 fixtures rotas). Un invariante declarado que ningún detector registrado emite → ROJO
 `MOTOR NO EJERCITADO`.
 
