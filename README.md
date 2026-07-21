@@ -95,10 +95,10 @@ cualquier detector nuevo están en [CONTRATO_DETECTOR.md](CONTRATO_DETECTOR.md).
 
 ### The problem
 
-You build a system with several AI skills, each one a specialist, plus a router that decides
-which skill handles each request. It works.
+You build a system with several AI skills, each one a specialist. A router decides which skill
+handles each request. It works.
 
-Months later it still works. And yet it is no longer the system you built. One skill stopped
+Months later it still works. But it is no longer the system you built. One skill stopped
 receiving work because nobody regenerated the list the router reads. Two skills are described so
 similarly that the router cannot tell them apart. A handful of documents point to files deleted
 weeks ago.
@@ -113,8 +113,8 @@ single assignment. They existed on disk, they worked when called by hand, and th
 know about them because they were missing from its list. It was found by accident.
 
 **The wrong expert.** That same day, a question about severance pay was routed to the accounting
-expert instead of the HR one. Three times out of three. The cause was not the HR skill. It was
-that the accounting one claimed the same words, and nobody had written down where each one ended.
+expert instead of the HR one. Three times out of three. The cause was not the HR skill. The
+accounting one claimed the same words, and nobody had written down where each one ended.
 
 Both failures are exactly what this kit detects. Neither raised an error.
 
@@ -139,7 +139,7 @@ There are two independent paths here. The first walks the system and issues its 
 second recomputes it on its own, importing nothing from the first. **If the two disagree, the
 result is red even when each one says green on its own.**
 
-It is plain double-checking, put into code instead of left to the discipline of whoever runs it.
+It is ordinary double-checking, written into the code instead of left to whoever runs it.
 
 ### Usage
 

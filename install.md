@@ -68,7 +68,7 @@ construir una config desde cero). `audit_trail.yaml` es el único **condicional*
 exige si el detector `audit_chain` está registrado (§2.5); sin la feature, su ausencia no
 rompe nada.
 
-### 1.3 Ejecutar el gate técnico (criterio A)
+### 1.3 Ejecutar el gate técnico
 
 El gate se comprueba por **dos métodos que deben coincidir** (doctrina "cifra por
 instrumento = dos métodos"):
@@ -342,13 +342,13 @@ ilegible → `INV-AUDIT-ILEGIBLE` ENFERMO.
 
 ---
 
-## 3. Criterio B: la prueba de que install.md especifica de verdad
+## 3. Comprueba que este documento te vale a TI
 
-El gate técnico (criterio A) prueba **fontanería**: que los detectores ejecutan y detectan
-sobre las fixtures del propio equipo. **No prueba valor para un tercero.** Por eso v1 exige
-también:
+El gate técnico prueba la fontanería: que los detectores se ejecutan y detectan sobre las
+fixtures que vienen en el repo. Eso **no prueba que el kit te sirva a ti**, porque tu corpus no
+es el de estas fixtures.
 
-**CRITERIO B (humano externo).** Un segundo humano, **ajeno al equipo constructor**, que:
+La comprobación que sí lo prueba, y que puedes hacer tú solo:
 
 1. Instala el kit siguiendo **solo este `install.md`**, sin ayuda del constructor.
 2. Prepara un **corpus propio** (aunque sea sintético): al menos 2 skills con su
@@ -361,11 +361,11 @@ también:
    correcto cuando siembra un defecto (borra una entrada del registro → INV-R1; rompe un
    wikilink → lint ENFERMO; vacía el summary de un `BLOCKED` → result_contract RECHAZO).
 
-**Se considera superado** si ese humano llega a veredictos coherentes **sin preguntar nada
-al constructor**. Si necesita ayuda, este `install.md` no especifica el formato de corpus
-de verdad y hay que ampliarlo. Sin criterio B, v1 **no** cierra (solo pasa el criterio A).
+**Está superada** si llegas a veredictos coherentes sin necesitar ayuda de nadie. Si te
+atascas, el fallo es de este documento y no tuyo: significa que no especifica el formato de
+corpus con la precisión suficiente. Ábrelo como incidencia y se amplía.
 
-> **Nota de plataforma.** `agentes_base/` y `gobernanza/` son material de proceso del
-> ecosistema Claude Code; un tercero sin ese runtime no obtiene *enforcement* de ellos.
-> El **núcleo verificable** (motor + detectores + contrato + gate) es independiente de la
-> plataforma y es lo que el criterio B ejercita.
+> **Nota de plataforma.** La carpeta `gobernanza/` recoge métricas pensadas para el entorno
+> Claude Code, y sin ese entorno no imponen nada por sí solas. El núcleo que sí es
+> independiente de cualquier plataforma, y el que esta comprobación ejercita, son el motor,
+> los detectores, el contrato y el gate.
