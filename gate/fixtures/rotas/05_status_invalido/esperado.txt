@@ -1,0 +1,10 @@
+# Fixture ROTA 05 — status invalido
+#
+# Defecto sembrado: status="TERMINADO_OK" no pertenece al enum permitido
+# {OK, WARN, BLOCKED, ERROR}. El Result Contract debe rechazarlo.
+# Rojo esperado EXACTO:
+
+RESULT-CONTRACT -> RECHAZO
+detector: result_contract
+detalle_esperado: status 'TERMINADO_OK' fuera del enum {OK,WARN,BLOCKED,ERROR}
+veredicto_detector: ENFERMO

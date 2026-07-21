@@ -1,0 +1,67 @@
+# invariantes.yaml — nace con 3 invariantes NO vacíos (cierra hueco #6)
+#
+# Uno por detector. Cada uno apunta a un detector registrado y se ejerce sobre
+# gate/fixtures/limpias/. El gate ASSERT que estos 3 ids son EXACTAMENTE los que el
+# registro del runner ejecutó (cobertura-motor). Si un id declarado aquí no lo emite
+# ningún detector registrado -> ROJO 'MOTOR NO EJERCITADO'.
+#
+# ESTO PRUEBA EJECUCIÓN POR EL REGISTRO, NO CORRECCIÓN de la lógica.
+# La correción la prueban las fixtures rotas (cada una con su rojo esperado).
+
+invariantes:
+
+  # --- Detector gate_routing: cobertura de routing (skill invisible) ---
+  - id: "INV-R1"
+    detector: "gate_routing"
+    descripcion: "Toda skill con descriptor tiene entrada en el registro de routing (no hay skills invisibles)."
+    esperado: "sin_skills_invisibles"
+    severidad: "alta"        # ENFERMO si falla
+
+  # --- Detector lint_corpus: enlaces del corpus (wikilink roto) ---
+  - id: "LINT-WIKILINK"
+    detector: "lint_corpus"
+    descripcion: "Todo wikilink/puntero apunta a un fichero existente dentro del corpus."
+    esperado: "sin_enlaces_rotos"
+    severidad: "alta"        # ENFERMO si falla
+
+  # --- Detector panel_salud: agregador anti-falso-verde ---
+  - id: "INV-PANEL"
+    detector: "panel_salud"
+    descripcion: "El panel agrega las funciones puras sin colar un verde por defecto (anti-falso-verde)."
+    esperado: "panel_coherente"
+    severidad: "media"       # VIGILAR si falla
+
+
+# --- Invariantes ON-DEMAND (severidad, pero FUERA de la cobertura-motor) ---
+#
+# Estos invariantes NO se emiten sobre el corpus LIMPIO (solo cuando hay un defecto
+# concreto), por eso NO pueden vivir en la lista `invariantes` de arriba: la
+# cobertura-motor exige {ids declarados} == {ids ejecutados sobre limpias}, y sobre
+# limpias estos NO se ejecutan. Su SEVERIDAD, sin embargo, hace falta para que el
+# semáforo sepa que su fallo es ENFERMO (no un simple VIGILAR por defecto). El runner
+# fusiona este mapa {id -> severidad} SIN meterlo en la cuenta de la cobertura.
+#
+#   · INV-R4              : colisión Jaccard de routing (gate_routing, solo si hay colisión).
+#   · RESULT-CONTRACT     : envelope de handoff que rompe el contrato (result_contract).
+#   · LINT-MDLINK         : enlace markdown [texto](destino.md) a un .md inexistente (lint_corpus).
+#   · LINT-ABSPATH        : ruta absoluta en el corpus = defecto de PORTABILIDAD (lint_corpus). Media -> VIGILAR.
+#   · LINT-RAGSEC         : RAG nombrado en `## RAG QUE DEBES CARGAR` que no existe (lint_corpus).
+#   · INV-AUDIT-CADENA    : una huella del audit trail no casa con la almacenada (audit_chain).
+#   · INV-AUDIT-ENLACE    : el prev de una entrada no casa con la huella real de la anterior (audit_chain).
+#   · INV-AUDIT-SECUENCIA : seq del audit trail no contiguo desde 0 (audit_chain).
+#   · INV-AUDIT-ILEGIBLE  : una línea del trail no es JSON válido (audit_chain; bug H1). Un trail
+#                           ilegible da ENFERMO con forma de contrato — ni traceback ni falso SANO.
+#
+# Los tres INV-AUDIT-* van AQUÍ (no en la lista contada) porque audit_chain solo los
+# emite cuando HAY trail y está roto: sobre las fixtures de routing (sin trail) devuelve
+# [], así que meterlos en la lista rompería la cobertura-motor. Mismo criterio que INV-R4.
+severidades_on_demand:
+  INV-R4: "alta"
+  RESULT-CONTRACT: "alta"
+  LINT-MDLINK: "alta"
+  LINT-ABSPATH: "media"
+  LINT-RAGSEC: "alta"
+  INV-AUDIT-CADENA: "alta"
+  INV-AUDIT-ENLACE: "alta"
+  INV-AUDIT-SECUENCIA: "alta"
+  INV-AUDIT-ILEGIBLE: "alta"

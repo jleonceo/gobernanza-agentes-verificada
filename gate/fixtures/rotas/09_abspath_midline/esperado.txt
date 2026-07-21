@@ -1,0 +1,8 @@
+# Fixture ROTA 09 — ruta absoluta a MEDIA linea (falso negativo D1 de la auditoria)
+#
+# Rojo esperado EXACTO (severidad media -> VIGILAR, no ENFERMO):
+
+LINT-ABSPATH -> FALLO
+detector: lint_corpus
+detalle_esperado: ruta absoluta a media linea detectada (defecto de portabilidad)
+veredicto_detector: VIGILAR

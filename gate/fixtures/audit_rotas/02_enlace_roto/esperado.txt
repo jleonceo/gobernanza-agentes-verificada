@@ -1,0 +1,7 @@
+# Fixture ROTA audit — INV-AUDIT-ENLACE
+# Rojo esperado EXACTO (audit trail, SPEC §5.1 + §7):
+
+INV-AUDIT-ENLACE -> FALLO
+detector: audit_chain
+detalle_esperado: prev de la entrada seq=2 no casa con la huella real de seq=1
+veredicto_detector: ENFERMO

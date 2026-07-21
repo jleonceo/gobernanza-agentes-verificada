@@ -1,0 +1,7 @@
+# Fixture ROTA audit — INV-AUDIT-ILEGIBLE
+# Rojo esperado EXACTO (audit trail, SPEC §5.1 + §7):
+
+INV-AUDIT-ILEGIBLE -> FALLO
+detector: audit_chain
+detalle_esperado: la linea 2 del trail no es JSON valido (trail ilegible: no se puede verificar)
+veredicto_detector: ENFERMO

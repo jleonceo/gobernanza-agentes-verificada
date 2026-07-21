@@ -1,0 +1,12 @@
+# Esperado del mini-corpus LIMPIO (camino feliz)
+#
+# Todos los detectores deben devolver SANO sobre este corpus.
+# Formato: <detector> -> <veredicto esperado>
+# El verificador_minimo contrasta cada Veredicto.ok contra esta etiqueta.
+
+gate_routing -> SANO
+lint_corpus -> SANO
+panel_salud -> SANO
+
+# Veredicto agregado del run completo:
+AGREGADO -> SANO

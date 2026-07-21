@@ -1,0 +1,9 @@
+# Fixture ROTA 08 — seccion RAG con RAG inexistente
+#
+# Defecto sembrado: skill-x/SKILL.md declara cargar `Guia_Que_No_Existe.md` (no existe).
+# Rojo esperado EXACTO:
+
+LINT-RAGSEC -> FALLO
+detector: lint_corpus
+detalle_esperado: RAG Guia_Que_No_Existe.md nombrado en la seccion RAG sin fichero en el corpus
+veredicto_detector: ENFERMO

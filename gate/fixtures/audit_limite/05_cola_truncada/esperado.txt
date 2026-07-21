@@ -1,0 +1,10 @@
+# Fixture LÍMITE audit — 05_cola_truncada
+#
+# LÍMITE CONOCIDO (SPEC §5.2): se borraron las últimas entradas del trail. La
+# cadena que queda es internamente consistente, así que el hash chain lineal de
+# FASE 1 la da SANO. NO es un verde bueno: es el hueco que cubre el checkpoint
+# anclado de FASE 2 (§9). Cuando exista ese checkpoint, esta fixture pasará a ROJO.
+# Aquí sirve para DOCUMENTAR el límite sin maquillarlo, no para bendecir el truncamiento.
+#
+# Veredicto esperado del run (fase 1):
+AGREGADO -> SANO

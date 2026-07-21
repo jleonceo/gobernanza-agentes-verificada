@@ -1,0 +1,38 @@
+# pyproject.toml — envoltura de producto mínima (auditoría 07/07/2026, deuda #4:
+# "sin pyproject/empaquetado pip, sin versión en el código").
+#
+# Versión 1.0.0. La condición que este mismo comentario fijaba ("v1.0 se cierra con el
+# Criterio B") se cumplió el 08/07/2026: DECISIONES.md la declara cerrada con H1 (surfacing
+# del SANO-por-vacío), H2 (empaquetado) y la LICENSE en Apache-2.0. El número se quedó en
+# 0.9.0 trece días porque nadie tocó este fichero al cerrarla. Corregido el 21/07/2026: no
+# es una decisión nueva, es ejecutar una ya tomada y escrita.
+# La dependencia PyYAML replica EXACTAMENTE el pin de requirements.txt (una sola
+# fuente de verdad del rango: si se cambia allí, cambiarlo aquí — y viceversa).
+#
+# LICENCIA: Apache-2.0 — decidida por Juan el 07/07/2026 (misma que los repos del
+# Banco Santander, la referencia que seguimos: permisiva + concesión de patentes +
+# protección de marca). Texto oficial completo en el fichero LICENSE.
+
+[project]
+name = "agent-governance-checks"
+version = "1.0.0"
+description = "Verificadores deterministas (sin LLM) de routing y corpus para sistemas de agentes/skills: gate_routing, lint_corpus, panel_salud, result_contract y audit_chain."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+    "PyYAML>=5.4,<7.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# El kit se distribuye como árbol de módulos (motor/, detectores/, contrato/), no
+# como paquete único con __init__.py; se enumeran explícitos para que un
+# `pip install .` no auto-descubra gate/fixtures ni carpetas de proceso.
+packages = []
+py-modules = []

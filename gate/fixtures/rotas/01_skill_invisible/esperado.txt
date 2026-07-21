@@ -1,0 +1,9 @@
+# Fixture ROTA 01 — skill invisible
+#
+# Defecto sembrado: skill-fantasma tiene SKILL.md pero no aparece en el registro.
+# Rojo esperado EXACTO (del SPEC, MÉTODO 1-NEGATIVO):
+
+INV-R1 -> FALLO
+detector: gate_routing
+detalle_esperado: skill-fantasma presente en skills/ y ausente del registro de routing
+veredicto_detector: ENFERMO

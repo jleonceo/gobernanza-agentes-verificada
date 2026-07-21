@@ -1,0 +1,32 @@
+# routing_paths.yaml — dónde vive cada pieza del corpus (VARIABLE por empresa)
+#
+# Externaliza lo que HOY gate_routing_det.py cablea como expanduser('~/.claude/skills'),
+# expanduser('~/.claude/rag') y el literal 'Registro_Enjambres_TechAcces.md' (cierra
+# huecos #1 y #5 del SPEC). En el kit limpio NINGUNA de estas rutas vive en código:
+# el detector las lee de ctx (config_loader las inyecta) y las resuelve SIEMPRE
+# relativas a ctx.root — nunca expanduser, nunca ruta absoluta literal.
+#
+# config_loader es FAIL-FAST: si falta cualquiera de estas claves, aborta con un
+# mensaje que la nombra, sin default silencioso (un default reintroduce el hardcodeo
+# por la puerta de atrás y anula el pre-check grep-cero).
+#
+# TODAS las rutas son RELATIVAS a la root del corpus inyectada en ctx.root.
+# En el mini-corpus del gate:  <root>/skills/<skill>/SKILL.md,
+#                              <root>/rag/<Guia>.md,
+#                              <root>/Registro_Enjambres.md
+
+skills_dir: "skills"                    # carpeta con los descriptores de skill (un subdir por skill)
+rag_dir: "rag"                          # carpeta con los ficheros RAG destino
+registro_path: "Registro_Enjambres.md"  # índice de routing que lee el orquestador (relativo a root)
+skill_descriptor: "SKILL.md"            # nombre del fichero descriptor dentro de cada carpeta de skill
+envelope_glob: "envelope*.json"        # ficheros de envelope de handoff que valida result_contract (RELATIVO a root, recursivo)
+
+# --- OPCIONAL: acotar el escaneo de lint_corpus a subárboles concretos ---
+# Lista de carpetas de PRIMER NIVEL (relativas a root) a las que lint_corpus limita su
+# rglob de .md. VACÍA o ausente = escanear TODO el corpus (comportamiento por defecto, sin
+# regresión). Whitelist, no blacklist: a prueba de ruido futuro (un subárbol nuevo bajo
+# root no se cuela sin nombrarlo). Se usa cuando el root contiene subárboles vecinos al de
+# routing (memoria con forward-links colgantes intencionales, backups, plugins de terceros)
+# que darían falsos LINT-WIKILINK/MDLINK. En el dogfooding del corpus real (~/.claude) se
+# fija a [skills, rag]. Es OPCIONAL: config_loader no la exige (no rompe el FAIL-FAST).
+include_subtrees: []

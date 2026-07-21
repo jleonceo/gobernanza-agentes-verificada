@@ -1,0 +1,11 @@
+# exentas.yaml — nombres exentos de invariantes de routing (VARIABLE por empresa)
+#
+# Externaliza lo que HOY gate_routing_det.py cablea como EXENTAS_R3={'orquestador-maestro'}
+# y la lista de skills TechAcces exentas (cierra hueco #5). En el kit limpio NADA de esto
+# vive en código: el detector lee ctx.exentas.
+#
+# En las fixtures sintéticas de gate/ el orquestador raíz del mini-corpus se llama
+# 'orquestador-demo' y no necesita entrada de routing (él ES el router).
+
+exentas_routing:
+  - "orquestador-demo"       # el router raíz del mini-corpus limpio; no se enruta a sí mismo

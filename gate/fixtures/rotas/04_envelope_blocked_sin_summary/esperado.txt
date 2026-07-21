@@ -1,0 +1,10 @@
+# Fixture ROTA 04 — envelope BLOCKED sin summary
+#
+# Defecto sembrado: status=BLOCKED pero summary vacio. Viola la regla dura
+# del Result Contract: BLOCKED|ERROR => summary obligatorio y no vacio.
+# Rojo esperado EXACTO:
+
+RESULT-CONTRACT -> RECHAZO
+detector: result_contract
+detalle_esperado: status BLOCKED exige summary no vacio; summary esta vacio
+veredicto_detector: ENFERMO

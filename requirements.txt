@@ -1,0 +1,10 @@
+# agent-governance-checks — dependencias
+#
+# El kit es determinista, read-only y stdlib-puro EXCEPTO por una única dependencia
+# externa: PyYAML, que carga la config VARIABLE (config/*.yaml) en motor/config_loader.py.
+# Verificado en el propio código (config_loader.py: "PyYAML (única fuera de stdlib,
+# declarada en el SPEC)"). No hay ninguna otra (grep anthropic|requests|httpx = 0).
+#
+# Rango fijado a propósito: PyYAML 5.4 introdujo el loader seguro por defecto que usa
+# el kit; 7.x se excluye hasta validar (fixtures limpias deben seguir dando SANO). Ver UPGRADE.md.
+PyYAML>=5.4,<7.0

@@ -1,0 +1,13 @@
+# Fixture ROTA 06 — colision de routing PARCIAL (Jaccard en banda)
+#
+# Defecto sembrado: skill-tres y skill-cuatro con descripciones PARCIALMENTE
+# solapadas (Jaccard ~0.33, ENTRE el umbral operativo 0.22 y el castrado 1.0).
+# A diferencia de la 02 (Jaccard=1.0, colisionaria hasta con el default castrado),
+# esta fixture SOLO da rojo si el umbral operativo esta vivo -> distingue "umbral
+# operativo" de "umbral desactivado por config ausente" (DEFECTO 1 de la auditoria).
+# Rojo esperado EXACTO:
+
+INV-R4 -> FALLO
+detector: gate_routing
+detalle_esperado: colision Jaccard parcial entre skill-tres y skill-cuatro por encima del umbral operativo
+veredicto_detector: ENFERMO

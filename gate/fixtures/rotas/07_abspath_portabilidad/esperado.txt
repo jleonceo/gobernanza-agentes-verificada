@@ -1,0 +1,9 @@
+# Fixture ROTA 07 — ruta absoluta (portabilidad)
+#
+# Defecto sembrado: MEMORY.md contiene una ruta absoluta C:\Users\...\nota.md
+# Rojo esperado EXACTO (severidad media -> VIGILAR, no ENFERMO):
+
+LINT-ABSPATH -> FALLO
+detector: lint_corpus
+detalle_esperado: ruta absoluta detectada (defecto de portabilidad)
+veredicto_detector: VIGILAR

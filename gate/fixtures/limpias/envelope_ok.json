@@ -1,0 +1,8 @@
+{
+  "status": "OK",
+  "risk": "LOW",
+  "skill_applied": "skill-alfa",
+  "summary": "Conciliacion completada sin incidencias.",
+  "artifacts": ["informe_alfa.md"],
+  "next": "ninguno"
+}

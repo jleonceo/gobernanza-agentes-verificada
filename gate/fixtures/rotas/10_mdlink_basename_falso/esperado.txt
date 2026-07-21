@@ -1,0 +1,6 @@
+# Fixture ROTA 10 — mdlink a ruta erronea con basename existente (falso negativo D2)
+#
+LINT-MDLINK -> FALLO
+detector: lint_corpus
+detalle_esperado: mdlink a carpeta_inexistente/Guia_Alfa.md sin fichero destino real
+veredicto_detector: ENFERMO

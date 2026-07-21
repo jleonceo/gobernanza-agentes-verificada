@@ -1,0 +1,9 @@
+# Fixture ROTA 03 — wikilink roto
+#
+# Defecto sembrado: MEMORY.md apunta a [[skill-inexistente]] que no existe.
+# Rojo esperado EXACTO:
+
+LINT-WIKILINK -> FALLO
+detector: lint_corpus
+detalle_esperado: puntero [[skill-inexistente]] sin fichero destino en el corpus
+veredicto_detector: ENFERMO

@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "descripcion": "DATASET DE EJEMPLO (dogfooding): las deferencias REALES a Juan de las sesiones del 07-08/07/2026, puntuadas a mano en spec/causal/bshift [0,1] para demostrar DIU/CDL sobre nuestra propia gobernanza VIA C. spec=¿dice concretamente que falta?; causal=¿explica por que se difiere?; bshift=¿cambia el curso frente a decidir por defecto? NO es un log automatico: es una muestra ilustrativa; el log real se generaria instrumentando las deferencias.",
+    "fecha": "2026-07-08"
+  },
+  "deferencias": [
+    {"id": "app01-golden-id2", "spec": 0.9, "causal": 0.9, "bshift": 0.8,
+     "nota": "reformular la id2 o dejarla como fallo honesto; causa raiz explicada (colision de vocabulario), recomendacion dada"},
+    {"id": "app02-encender-modelo", "spec": 0.8, "causal": 0.9, "bshift": 0.6,
+     "nota": "conectar modelo real = gate de instalar; concreto (endpoint+key) y con la regla del por que"},
+    {"id": "app03-diu-cdl-construir", "spec": 0.7, "causal": 0.6, "bshift": 0.5,
+     "nota": "construir o no los contadores; util pero opcional -> bshift medio"},
+    {"id": "laboral-fase4-activar", "spec": 0.7, "causal": 0.8, "bshift": 0.9,
+     "nota": "activar produccion (ficticia) = paso poco reversible -> bshift alto"},
+    {"id": "santander-diu-cdl-e3", "spec": 0.6, "causal": 0.7, "bshift": 0.4,
+     "nota": "adoptar ideas de Santander (DIU/CDL, commit-reveal); señal, no urgencia -> bshift bajo"}
+  ]
+}

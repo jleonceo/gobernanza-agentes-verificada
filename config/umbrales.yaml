@@ -1,0 +1,19 @@
+# umbrales.yaml — tolerancias y cortes (VARIABLE por empresa)
+#
+# Externaliza los umbrales que HOY viven hardcodeados en el origen
+# (JACCARD_WARN=0.22 en generar_mapa_skills_rag.py, presupuestos de contexto, etc.).
+# config_loader es FAIL-FAST: clave ausente -> aborta, sin default silencioso.
+
+routing:
+  jaccard_warn: 0.22          # similitud de descripciones por encima = colisión (INV-R4)
+  # RESERVADO / no consumido hoy (D8): INV-R2 no existe en el kit (viven R1 y R4). Ningun
+  # codigo lee esta clave; queda para cuando se implemente el aviso de frescura de routing.
+  frescura_dias: 30           # entrada de routing mas antigua que esto = (futuro aviso de frescura)
+
+corpus:
+  stale_max_dias: 90          # marca STALE tolerada hasta este umbral (RESERVADO, ver install.md 2.2)
+
+panel:
+  # RESERVADO / no consumido hoy (D8): panel_salud NO lee umbrales (agrega por inyeccion de
+  # dependencias). Ningun codigo lee esta clave; queda para un futuro tope del listado.
+  presupuesto_listado: 200    # lineas maximas del listado auto-invocable (futuro)

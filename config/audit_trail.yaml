@@ -1,0 +1,21 @@
+# audit_trail.yaml — dónde vive el audit trail encadenado (VARIABLE por instalación)
+#
+# Externaliza la ruta del trail para que NINGÚN literal viva en el detector
+# `detectores/audit_chain.py` (CONTRATO_DETECTOR §3: cero rutas en código). El detector
+# lee `trail_path` de ctx.audit_trail (config_loader lo inyecta) y lo resuelve SIEMPRE
+# relativo a ctx.root — nunca expanduser, nunca ruta absoluta literal.
+#
+# RELATIVO a la root del corpus/almacén inyectada en ctx.root. En las fixtures del gate,
+# cada fixture ES la root y el trail vive como <root>/trail.jsonl. En una instalación
+# real, apuntaría al almacén PROPIO del kit (nunca al corpus del cliente): p.ej.
+# "audit/trail.jsonl" bajo una raíz de almacén del kit inyectada.
+#
+# El trail es un ARTEFACTO DEL KIT (SPEC §1): lo escribe `motor.audit_trail.anexar`
+# (opt-in, append-only); el detector solo lo LEE. El invariante read-only sobre el
+# corpus del cliente queda intacto.
+#
+# Refuerzo recomendado (no codificado, ver install.md): permisos WORM / carpeta sin
+# borrado a nivel de SO. El hash chain detecta la manipulación a posteriori; el WORM la
+# dificulta a priori.
+
+trail_path: "trail.jsonl"

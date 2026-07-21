@@ -1,0 +1,6 @@
+# Fixture ROTA 11 — wikilink al nombre de una carpeta no-skill (falso negativo D3)
+#
+LINT-WIKILINK -> FALLO
+detector: lint_corpus
+detalle_esperado: puntero [[rag]] sin fichero destino (rag es solo el nombre de una carpeta)
+veredicto_detector: ENFERMO

@@ -1,0 +1,62 @@
+# corpus_conventions.yaml — TODO patrón de parseo vive AQUÍ, nunca en detectores/
+#
+# Mecanismo obligatorio del SPEC (endurecimiento §1): CERO formato hardcodeado.
+# motor/config_loader.py compila estos patrones y los inyecta en ctx.conventions.
+# NINGÚN re.compile con literal debe vivir en detectores/ ni en motor/.
+#
+# config_loader es FAIL-FAST: si falta cualquiera de estas claves, aborta con un
+# mensaje que la nombra — NUNCA aplica un default silencioso (un default reintroduce
+# el hardcodeo por la puerta de atrás y anula el pre-check grep-cero).
+
+# --- Frontmatter de los descriptores de skill (p.ej. SKILL.md) ---
+frontmatter:
+  delimiter: "---"                       # abre y cierra el bloque YAML frontmatter
+  name_regex: '^name:\s*(?P<name>\S+)'   # extrae el nombre declarado de la skill
+
+# --- Registro de routing (el índice que lee el orquestador) ---
+routing_registry:
+  filename: "Registro_Enjambres.md"                 # nombre del fichero de registro (RELATIVO a root)
+  # backticks opcionales alrededor del nombre: los registros reales suelen envolver el
+  # nombre de skill en `code` (convención markdown casi universal; el propio corpus lo hace).
+  # Dogfooding 05/07: sin esto, un registro con `nombre` marca TODAS las skills como invisibles.
+  entry_regex: '^\|\s*`?(?P<name>[a-z0-9-]+)`?\s*\|'  # una fila = una skill enrutada
+
+# --- Wikilinks y enlaces del corpus ---
+wikilinks:
+  wikilink: '\[\[(?P<target>[^\]|]+)(?:\|[^\]]+)?\]\]'   # [[destino]] o [[destino|alias]]
+  mdlink: '\[[^\]]+\]\((?P<target>[^)]+)\)'             # [texto](destino.md)
+  codespan: '`[^`]+`'                                    # se ignora lo que va en `code`
+  abspath: '(?:(?<![A-Za-z0-9])[A-Za-z]:[\\/]|^/)[\w.\-]'  # ruta absoluta real. Brazo Windows (unidad C:\):
+                                                        # a MEDIA linea (search), pero con lookbehind para no
+                                                        # marcar URLs (https://) — la unidad es UNA letra suelta.
+                                                        # Brazo Unix (/raiz): anclado a '^' (evita el FP de prosa
+                                                        # que empieza por '/ '). D1: antes iba todo anclado a '^',
+                                                        # asi una ruta C:\ en mitad de linea pasaba (falso negativo).
+
+# --- Sección canónica de RAG dentro de una skill ---
+rag_section:
+  heading_text: "RAG QUE DEBES CARGAR"
+  heading_regex: '^##\s+RAG QUE DEBES CARGAR\s*$'
+
+# --- Marcado markdown genérico ---
+markup:
+  heading: '^(?P<hashes>#{1,6})\s+(?P<title>.+?)\s*$'
+  codespan: '`(?P<code>[^`]+)`'
+  rag_file: '(?P<rag>[A-Za-z0-9_\-]+\.md)'
+
+# --- Tokenizador para similitud Jaccard entre descripciones (colisión de routing) ---
+tokenizer:
+  word_regex: '[a-z0-9]+'
+  min_len: 3
+  stopwords: ["the", "and", "que", "con", "para", "los", "las", "del", "una", "por"]
+  ngrams: 1
+
+# --- Ficheros de infraestructura: NO cuentan como huérfanos ---
+infra_files:
+  - "README.md"
+  - "install.md"
+  - "CONTRATO_DETECTOR.md"
+  - "MEMORY.md"
+
+# --- Marca STALE (contenido marcado como obsoleto) ---
+stale_marker_regex: '(?i)\b(STALE|OBSOLETO|DEPRECATED|CADUCADO)\b'

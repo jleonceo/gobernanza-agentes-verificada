@@ -1,0 +1,9 @@
+# Fixture ROTA 06 — mdlink markdown roto
+#
+# Defecto sembrado: MEMORY.md enlaza [texto](guia_que_no_existe.md) que no existe.
+# Rojo esperado EXACTO:
+
+LINT-MDLINK -> FALLO
+detector: lint_corpus
+detalle_esperado: mdlink [texto](guia_que_no_existe.md) sin fichero destino en el corpus
+veredicto_detector: ENFERMO

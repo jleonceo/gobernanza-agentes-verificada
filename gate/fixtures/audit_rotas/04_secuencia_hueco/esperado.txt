@@ -1,0 +1,7 @@
+# Fixture ROTA audit — INV-AUDIT-SECUENCIA
+# Rojo esperado EXACTO (audit trail, SPEC §5.1 + §7):
+
+INV-AUDIT-SECUENCIA -> FALLO
+detector: audit_chain
+detalle_esperado: falta la entrada seq=1: la secuencia salta de 0 a 2
+veredicto_detector: ENFERMO

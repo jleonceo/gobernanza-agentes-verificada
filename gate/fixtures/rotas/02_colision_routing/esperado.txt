@@ -1,0 +1,10 @@
+# Fixture ROTA 02 — colision de routing (Jaccard)
+#
+# Defecto sembrado: skill-uno y skill-dos con descripcion casi identica
+# (Jaccard por encima de umbrales.yaml routing.jaccard_warn=0.22).
+# Rojo esperado EXACTO:
+
+INV-R4 -> FALLO
+detector: gate_routing
+detalle_esperado: colision Jaccard entre skill-uno y skill-dos por encima del umbral
+veredicto_detector: ENFERMO
