@@ -11,27 +11,27 @@ herramienta lo comprueba con código.**
 
 ### El problema
 
-Monta un sistema con varias habilidades de IA, cada una con su especialidad, y un repartidor
-que decide cuál atiende cada petición. Funciona.
+Monta un sistema con varias habilidades de IA, cada una con su especialidad. Un **enrutador**
+decide cuál de ellas atiende cada petición. Funciona.
 
 Meses después sigue funcionando. Pero ya no es el sistema que construiste. Una
-habilidad dejó de recibir trabajo porque nadie regeneró la lista que el repartidor consulta.
-Dos habilidades se describen de forma tan parecida que el repartidor las confunde. Media docena
-de documentos apuntan a ficheros que se borraron hace semanas.
+habilidad dejó de recibir trabajo porque nadie regeneró la lista que el enrutador consulta. Dos
+habilidades se describen de forma tan parecida que el enrutador ya no las distingue. Media
+docena de documentos apuntan a ficheros que se borraron hace semanas.
 
 Nada de eso da un error. El sistema responde igual de rápido y con la misma cara de estar bien.
 Por eso no se detecta mirando. Hay que medirlo.
 
-### Dos casos reales, del sistema donde nació esta herramienta
+### Dos casos reales del sistema donde nació esta herramienta
 
 **La habilidad que nadie llamaba.** El 21 de julio de 2026 descubrí que dos habilidades llevaban
-semanas sin recibir un solo encargo. Existían en el disco, funcionaban al llamarlas a mano, y el
-repartidor no sabía de ellas porque faltaban en su lista. Se descubrió por casualidad.
+semanas sin recibir un solo encargo. Existían en el disco y funcionaban al llamarlas a mano. El
+enrutador no sabía de ellas porque faltaban en su lista. Se descubrió por casualidad.
 
 **El experto equivocado.** Ese mismo día, una pregunta sobre indemnización por despido se
 enrutaba al experto contable en lugar de al de personal. Tres veces de tres. La causa no estaba
-en la habilidad de personal. Estaba en que la del contable reclamaba las mismas palabras, y
-nadie había escrito dónde acababa cada una.
+en la habilidad de personal. La del contable reclamaba las mismas palabras. Nunca se escribió dónde
+acababa cada una.
 
 Los dos fallos son exactamente lo que este kit detecta. Ninguno de los dos dio un error.
 
@@ -41,7 +41,7 @@ Cinco detectores, todos de solo lectura y sin modelos de lenguaje:
 
 | Detector | Qué encuentra |
 |---|---|
-| `gate_routing` | Habilidades que el repartidor no conoce, y pares de habilidades que no sabe distinguir |
+| `gate_routing` | Habilidades que el enrutador no conoce. Y pares que ya no distingue |
 | `lint_corpus` | Referencias y enlaces que apuntan a ficheros que ya no existen |
 | `result_contract` | Entregas entre agentes sin el sobre obligatorio de estado, riesgo y resumen |
 | `audit_chain` | Un registro de auditoría al que le falta un eslabón o le han cambiado el orden |
@@ -75,7 +75,8 @@ cualquier detector nuevo están en [CONTRATO_DETECTOR.md](CONTRATO_DETECTOR.md).
 
 - **No usa IA.** Es código que lee ficheros y compara. Ahí está la gracia: da el mismo resultado
   hoy y dentro de seis meses, sin depender del modelo que tengas contratado.
-- **No arregla nada.** Señala. Reparar exige conocer el sistema, y eso no lo sabe una herramienta.
+- **No arregla nada.** Señala. Reparar exige conocer el sistema, que es justo lo que una
+  herramienta no sabe.
 - **No mide si tus agentes responden bien.** Mide si la instalación sigue entera. Para lo primero
   hay otros repos, enlazados abajo.
 
@@ -109,12 +110,12 @@ cannot spot it by looking. You have to measure it.
 ### Two real cases, from the system this tool came from
 
 **The skill nobody called.** On 21 July 2026 I found two skills that had gone weeks without a
-single assignment. They existed on disk, they worked when called by hand, and the router did not
-know about them because they were missing from its list. It was found by accident.
+single assignment. They existed on disk and worked when called by hand. The router did not know
+about them because they were missing from its list. It was found by accident.
 
 **The wrong expert.** That same day, a question about severance pay was routed to the accounting
 expert instead of the HR one. Three times out of three. The cause was not the HR skill. The
-accounting one claimed the same words, and nobody had written down where each one ended.
+accounting one claimed the same words. Nobody had written down where each one ended.
 
 Both failures are exactly what this kit detects. Neither raised an error.
 
