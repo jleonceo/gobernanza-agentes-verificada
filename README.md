@@ -47,7 +47,7 @@ Cinco detectores, todos de solo lectura y sin modelos de lenguaje:
 | `audit_chain` | Un registro de auditoría al que le falta un eslabón o le han cambiado el orden |
 | `panel_salud` | Un panel que da verde agregando comprobaciones que en realidad no se ejecutaron |
 
-### La pieza que casi nadie pone: el verificador del verificador
+### El verificador del verificador, que casi nadie incluye
 
 Cualquier herramienta que emite un veredicto tiene el mismo problema. Si dice verde, ¿cómo sabes
 que el verde es cierto y no un fallo de la propia herramienta?
@@ -163,4 +163,5 @@ Step by step setup in [install.md](install.md). The rules any new detector must 
 
 ---
 
-*Licencia MIT. Extraído de un sistema en producción y publicado como pieza autónoma.*
+*Licencia Apache 2.0 (ver [LICENSE](LICENSE)). Extraído de un sistema en producción y
+publicado como kit independiente.*

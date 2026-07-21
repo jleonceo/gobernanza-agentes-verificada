@@ -54,7 +54,7 @@ agent-governance-checks/
     invariantes.yaml
     exentas.yaml
     umbrales.yaml
-    routing_paths.yaml   # REQUERIDO: dónde vive cada pieza del corpus (skills_dir, registro…)
+    routing_paths.yaml   # REQUERIDO: dónde vive cada parte del corpus (skills_dir, registro…)
     audit_trail.yaml     # OPCIONAL — pero OBLIGATORIO si `audit_chain` está registrado (§2.5)
   gate/                  # suite de aceptación (fixtures limpias + rotas + audit) y sus 2 métodos
     run_gate.py

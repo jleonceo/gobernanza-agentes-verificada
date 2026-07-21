@@ -1,17 +1,11 @@
-# pyproject.toml — envoltura de producto mínima (auditoría 07/07/2026, deuda #4:
-# "sin pyproject/empaquetado pip, sin versión en el código").
+# pyproject.toml — empaquetado del kit.
 #
-# Versión 1.0.0. La condición que este mismo comentario fijaba ("v1.0 se cierra con el
-# Criterio B") se cumplió el 08/07/2026: DECISIONES.md la declara cerrada con H1 (surfacing
-# del SANO-por-vacío), H2 (empaquetado) y la LICENSE en Apache-2.0. El número se quedó en
-# 0.9.0 trece días porque nadie tocó este fichero al cerrarla. Corregido el 21/07/2026: no
-# es una decisión nueva, es ejecutar una ya tomada y escrita.
-# La dependencia PyYAML replica EXACTAMENTE el pin de requirements.txt (una sola
-# fuente de verdad del rango: si se cambia allí, cambiarlo aquí — y viceversa).
+# Version 1.0.0.
+# La dependencia PyYAML replica EXACTAMENTE el pin de requirements.txt: una sola fuente de
+# verdad del rango. Si se cambia alli, cambiarlo aqui, y viceversa.
 #
-# LICENCIA: Apache-2.0 — decidida por Juan el 07/07/2026 (misma que los repos del
-# Banco Santander, la referencia que seguimos: permisiva + concesión de patentes +
-# protección de marca). Texto oficial completo en el fichero LICENSE.
+# LICENCIA: Apache-2.0 (permisiva, con concesion de patentes y proteccion de marca).
+# Texto completo en el fichero LICENSE.
 
 [project]
 name = "agent-governance-checks"

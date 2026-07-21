@@ -3,21 +3,20 @@
 """
 motor/audit_trail.py — audit trail encadenado por hash (tamper-evident), FASE 1.
 
-Implementa el mecanismo del SPEC (SPEC_Audit_Trail_Encadenado_DRAFT_06072026.md):
-un log APPEND-ONLY donde cada entrada incorpora la huella (SHA-256) de la anterior
+Un log APPEND-ONLY donde cada entrada incorpora la huella (SHA-256) de la anterior
 (hash chain). Cualquier alteración, reordenación, inserción o hueco de secuencia
 rompe la recomputación desde ese punto y se LOCALIZA de forma determinista, sin LLM.
 
 STDLIB PURA: `hashlib`, `json`. Cero red, cero BD, cero PyYAML en este módulo.
 
-Partición READ-ONLY (SPEC §1): este módulo tiene UNA sola función que escribe
+Partición READ-ONLY: este módulo tiene UNA sola función que escribe
 (`anexar`, OPT-IN, append-only, jamás en el corpus del cliente ni con expanduser);
 `huella`, `cargar` y `verificar_cadena` son READ-ONLY. El detector `audit_chain`
 solo llama a las tres READ-ONLY, así que el invariante de venta (read-only sobre el
 corpus del cliente) queda intacto.
 
 NO es "firmado": un hash chain prueba integridad y orden, no identidad ni cubre el
-truncamiento de la cola (límite conocido §5.2; lo cubre el checkpoint de fase 2).
+truncamiento de la cola. Es un límite conocido, y lo cubre el checkpoint de la fase 2.
 """
 
 import hashlib

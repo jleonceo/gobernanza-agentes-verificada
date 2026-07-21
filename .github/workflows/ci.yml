@@ -1,0 +1,38 @@
+# El unico disparador que no depende de que un portatil concreto este encendido.
+#
+# Ejecuta las tres comprobaciones del kit sobre sus propias fixtures. Si alguien envia un
+# cambio que rompe un detector, o que desincroniza la documentacion del codigo, esto se pone
+# rojo antes de que nadie lo mire.
+name: gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt pytest
+
+      - name: Suite completa
+        run: python -m pytest -q
+
+      # Las tres comprobaciones del kit, por separado, para que el fallo diga CUAL cayo.
+      - name: Gate (metodo 1) sobre las fixtures limpias y rotas
+        run: python gate/run_gate.py --fixtures ambas
+
+      - name: Verificador minimo (metodo 2, independiente del anterior)
+        run: python gate/verificador_minimo.py
+
+      - name: CI-gate (los tres controles juntos)
+        run: python ci_gate.py
